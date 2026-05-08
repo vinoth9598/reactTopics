@@ -2,11 +2,14 @@
 import React from "react" ;
 
 function App(){
+  let name = "vinoth kumar" ;
+  let a = 10 ;
+  let b = 20 ;
+  
   return(
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+        <p> my name is {name}</p>
+        <p>{a} plus {b} is {a+b}</p>
     </div>
   )
 }
