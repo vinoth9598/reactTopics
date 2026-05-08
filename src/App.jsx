@@ -1,6 +1,24 @@
 
 import React, { useState } from "react" ;
 
+function Lists({lists}){
+  return(
+    <div>
+      <h3>List Details</h3>
+      {
+        lists.map((list , index) => (
+          <div key={index}>
+            <h3>{list.name}</h3>
+            <p>{list.age}</p>
+            <p>{list.email}</p>
+            <hr/>
+          </div>
+        ))
+      }
+    </div>
+  )
+}
+
 function App(){
   // useState hooks - manipulate to user data and states
 
