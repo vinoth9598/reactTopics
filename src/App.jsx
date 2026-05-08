@@ -1,12 +1,45 @@
 
 import React from "react" ;
 
-function App(){
+function Lists({lists}){
   return(
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+      <h3>List Details</h3>
+      {
+        lists.map((list , index) => (
+          <div key={index}>
+            <h3>{list.name}</h3>
+            <p>{list.age}</p>
+            <p>{list.email}</p>
+            <hr/>
+          </div>
+        ))
+      }
+    </div>
+  )
+}
+
+function App(){
+ const lists = [
+  {
+    name:"vinoth",
+    age:21,
+    email:"vinoth@gmail.com"
+  },
+  {
+    name:"vignesh",
+    age:20,
+    email:"vignesh@gmail.com"
+  },
+  {
+    name:"raja",
+    age:18,
+    email : "raja@gmail.com"
+  }
+ ];
+  return(
+    <div>
+        <Lists lists = {lists}/>
     </div>
   )
 }
