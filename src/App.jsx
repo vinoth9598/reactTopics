@@ -1,45 +1,45 @@
 
 import React from "react" ;
 
-//using data transfer to data destructure.
-function Hello({data}){
-  console.log(data);
+function Lists({lists}){
   return(
     <div>
-      <p>Welcome to component</p>
-      <p>my name is {data.name}</p>
-    </div>
-  )
-}
-
-function User(prop){
-  console.log(prop.data);
-  return(
-    <div>
-      <p>
-        {`My name is ${prop.data.name} my age is ${prop.data.age} and email ${prop.data.email}`}
-      </p>
+      <h3>List Details</h3>
+      {
+        lists.map((list , index) => (
+          <div key={index}>
+            <h3>{list.name}</h3>
+            <p>{list.age}</p>
+            <p>{list.email}</p>
+            <hr/>
+          </div>
+        ))
+      }
     </div>
   )
 }
 
 function App(){
-  let name = "vinoth kumar" ;
-  let a = 10 ;
-  let b = 20 ;
-  
-  const data = {
-    name : "vinoth",
-    age : 20,
+ const lists = [
+  {
+    name:"vinoth",
+    age:21,
     email:"vinoth@gmail.com"
+  },
+  {
+    name:"vignesh",
+    age:20,
+    email:"vignesh@gmail.com"
+  },
+  {
+    name:"raja",
+    age:18,
+    email : "raja@gmail.com"
   }
+ ];
   return(
     <div>
-        <p> my name is {name}</p>
-        <p>{a} plus {b} is {a+b}</p>
-
-        <Hello data = {data}/>
-        <User data = {data}/>
+        <Lists lists = {lists}/>
     </div>
   )
 }
