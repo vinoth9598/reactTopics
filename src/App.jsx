@@ -1,50 +1,31 @@
 
 import React, { useEffect, useState } from "react" ;
 
+function GrandChildComponent({data}){
+  console.log(`from grand child component : ${data}`);
+  return (
+    <div>
+      <h3>Grand Child Component</h3>
+    </div>
+  )
+}
+
+function ChildComponent ({data}){
+  console.log(data);
+  return (
+    <div>
+      <h2>Child Component</h2>
+      <GrandChildComponent data = {data}/>
+    </div>
+  )
+}
+
 function App(){
-  const [count, setCount] = useState(0);
-
-  const [posts, setPosts] = useState(null);
-
-  const fetchPosts = async () =>{
-    let response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-    let data = await response.json();
-    setPosts(data);
-  }
-  // title change
-  useEffect(()=>{
-    document.title = `Count : ${count}`
-  },[count]);
-
-  //data fetched using useEffect hook
-  //The following will run only once  
-  useEffect(()=>{
-    fetchPosts();
-  },[]);
-
-  const handleChange = ()=>{
-    setCount(count + 1);
-  }
-  console.log(count);
+  const parentData = `Hello from Parent` ;
   return(
     <div>
-      <h2>Document Title change</h2>
-      <button onClick={handleChange}>Change Count</button>
-      <hr/>
-      <h3>API DATA</h3>
-      {
-        posts ? (
-          <ul>
-            {
-              posts.map(post => 
-                <li key={post.id}>{post.title}</li>
-              )
-            }
-          </ul>
-        ):(
-          <p>Fetching Data...</p>
-        )
-      }
+      <h2>Parent Component</h2>
+      <ChildComponent data= {parentData}/>
     </div>
   )
 }
