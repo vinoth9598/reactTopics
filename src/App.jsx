@@ -1,12 +1,31 @@
 
 import React from "react" ;
 
+function GrandChildComponent({data}){
+  console.log(`from grand child component : ${data}`);
+  return (
+    <div>
+      <h3>Grand Child Component</h3>
+    </div>
+  )
+}
+
+function ChildComponent ({data}){
+  console.log(data);
+  return (
+    <div>
+      <h2>Child Component</h2>
+      <GrandChildComponent data = {data}/>
+    </div>
+  )
+}
+
 function App(){
+  const parentData = `Hello from Parent` ;
   return(
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+      <h2>Parent Component</h2>
+      <ChildComponent data= {parentData}/>
     </div>
   )
 }
