@@ -1,32 +1,27 @@
 
-import React, { useEffect, useState } from "react" ;
-
-function GrandChildComponent({data}){
-  console.log(`from grand child component : ${data}`);
-  return (
-    <div>
-      <h3>Grand Child Component</h3>
-    </div>
-  )
-}
-
-function ChildComponent ({data}){
-  console.log(data);
-  return (
-    <div>
-      <h2>Child Component</h2>
-      <GrandChildComponent data = {data}/>
-    </div>
-  )
-}
+import React from "react" ;
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import Home from "./Components/Home";
+import Notes from "./Components/Notes";
+import Users from "./Components/Users";
 
 function App(){
-  const parentData = `Hello from Parent` ;
+  const padding = {
+    padding:5 ,
+  }
   return(
-    <div>
-      <h2>Parent Component</h2>
-      <ChildComponent data= {parentData}/>
-    </div>
+    <Router>
+      <div>
+        <Link to='/' style={padding}>Home</Link>
+        <Link to='/notes' style={padding}>Notes</Link>
+        <Link to='/users' style={padding}>Users</Link>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/notes" element={<Notes/>}/>
+        <Route path="/users" element={<Users/>}/>
+      </Routes>
+    </Router>
   )
 }
 
