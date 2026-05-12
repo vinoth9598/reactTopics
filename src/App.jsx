@@ -1,96 +1,27 @@
 // Context API: It is to manage and share the states across the nested components or component tree without need to pass the props data down through multiple levels of the nested components.
 
-import axios from "axios";
-import React, { useEffect, useState } from "react" ;
-
-//mock server using this steps
-//npm install json-server, axios for api and create db.json file add json files
-// npx json-server --watch db.json --port 3001 
+import React from "react" ;
+import { useRef } from "react";
+/* useRef hook
+  -Its a reacts built in feature
+  - To create and manage references of DOM elements
+  - We can manipulate the elements using the reference without 
+  any unnecessary re-renders.
+*/
 
 function App(){
+  //get the reference of the button
+  const bodyRef = useRef(document.body);
 
-  const [users, setUsers] = useState([]);
-  const [content, setContent] = useState("");
-  const [editContent, setEditContent] =useState(null);
-
-  //Read 
-  const getUsers = () =>{
-    axios.get("http://localhost:3001/notes")
-    .then((res)=> setUsers(res.data));
-  };
-
-
-  //useEffect hook
-  useEffect(()=>{
-    getUsers();
-  },[]);
-
-  //create 
-  const addUser = () => {
-    axios.post("http://localhost:3001/notes", {content})
-    .then(() => {
-      setContent("");
-      getUsers();
-    })
+  const changeColor = () => {
+    const colors = ['red','blue','green','yellow','purple','pink','black','orange','white']
+    const randomColor = colors[Math.floor(Math.random()*10)];
+    bodyRef.current.style.backgroundColor = randomColor ;
   }
-
-  //delete 
-  const deleteUser = (userId) => {
-    axios.delete(`http://localhost:3001/notes/${userId} `)
-    .then(() => {
-      alert("content is deleted successfully.");
-      getUsers();
-    })
-  };
-
-  //editContent 
-  const editUser = (user) => {
-    setContent(user.content);
-    setEditContent(user.id);
-  };
-
-  const updateUser = () =>{
-    axios.put(`http://localhost:3001/notes/${editContent}`, {
-      id:editContent,
-      content : content 
-    })
-    .then(()=> {
-      setContent("");
-      setEditContent("");
-      getUsers();
-    })
-  }
-  
   return(
     <div>
-       <h3>CRUD App</h3>
-       <input
-          type="text"
-          placeholder="Enter Content"
-          value = {content}
-          onChange={(e)=> setContent(e.target.value) }
-       />
-       {
-        editContent ? (
-          <button onClick={updateUser}>Update</button>
-        ):(
-          <button onClick={addUser}>Add</button>
-        )
-       }
-        <hr/>
-       <div>
-          {
-            users.map((user)=>(
-              <li key={user.id}>
-                {user.content}
-                <br/>
-                <button onClick={()=>deleteUser(user.id)}>Delete</button>
-                <button onClick={()=> editUser(user)}>Edit</button>
-                <hr/>
-              </li>
-            ))
-          }
-       </div>
+        <h3>Background Color Switcher</h3>
+        <button onClick={changeColor}>Change Color</button>
     </div>
   );
 }
