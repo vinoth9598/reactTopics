@@ -1,12 +1,26 @@
 
 import React from "react" ;
+import { useRef } from "react";
+/* useRef hook
+  -Its a reacts built in feature
+  - To create and manage references of DOM elements
+  - We can manipulate the elements using the reference without 
+  any unnecessary re-renders.
+*/
 
 function App(){
+  //get the reference of the button
+  const bodyRef = useRef(document.body);
+
+  const changeColor = () => {
+    const colors = ['red','blue','green','yellow','purple','pink','black','orange','white']
+    const randomColor = colors[Math.floor(Math.random()*10)];
+    bodyRef.current.style.backgroundColor = randomColor ;
+  }
   return(
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+        <h3>Background Color Switcher</h3>
+        <button onClick={changeColor}>Change Color</button>
     </div>
   )
 }
