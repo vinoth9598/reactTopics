@@ -1,10 +1,31 @@
-// Context API: It is to manage and share the states across the nested components or component tree without need to pass the props data down through multiple levels of the nested components.
+import React, { useMemo, useState } from 'react'
 
-function App(){
+function App() {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
 
-  return(
+  //Expensive calculation
+  const squareValue = useMemo(() => {
+    console.log("Calculating...") ;
+    return count * count ;
+
+  },[count]); //runs only count changes
+
+  return (
     <div>
-        <p>Simple Redux</p>
+      <h3>useMemo hook Example</h3>
+
+      <p>Count : {count}</p>
+      <p>Squared Value : {squareValue}</p>
+
+      <button onClick={()=> setCount(count + 1)}>Increment</button><br/>
+
+      <input
+        type='text'
+        placeholder='Type here'
+        value={text}
+        onChange={(e)=> setText(e.target.value)}
+      />
     </div>
   )
 }
