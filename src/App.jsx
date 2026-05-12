@@ -36,6 +36,7 @@ function Counter(){
   )
 }
 function App(){
+
   return(
     <Provider store = {store}>
         <Counter />
@@ -43,4 +44,4 @@ function App(){
   )
 }
 
-export default App ;
+export default App;
