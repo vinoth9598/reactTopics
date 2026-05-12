@@ -1,12 +1,31 @@
+import React, { useMemo, useState } from 'react'
 
-import React from "react" ;
+function App() {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
 
-function App(){
-  return(
+  //Expensive calculation
+  const squareValue = useMemo(() => {
+    console.log("Calculating...") ;
+    return count * count ;
+
+  },[count]); //runs only count changes
+
+  return (
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+      <h3>useMemo hook Example</h3>
+
+      <p>Count : {count}</p>
+      <p>Squared Value : {squareValue}</p>
+
+      <button onClick={()=> setCount(count + 1)}>Increment</button><br/>
+
+      <input
+        type='text'
+        placeholder='Type here'
+        value={text}
+        onChange={(e)=> setText(e.target.value)}
+      />
     </div>
   )
 }
