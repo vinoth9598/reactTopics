@@ -1,20 +1,56 @@
 // Context API: It is to manage and share the states across the nested components or component tree without need to pass the props data down through multiple levels of the nested components.
 
-import React, { useReducer } from "react" ;
-import { initialState, reducer } from "./countReducer";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React from "react" ;
 
-function App(){
-  const [state, dispatch] = useReducer(reducer, initialState);
+const ContactForm = () => {
+  return (
+     <Formik
+      initialValues={{name : "", email:"", message:""}}
 
-  return(
-    <div>
-        <h3>useReducer using counter : {state.count}</h3>
-        <button onClick={() => dispatch({ type:"Incr" })}>Increment</button>
-        <button onClick={() => dispatch({ type:"Decr" })}>Decrement</button>
-        <button onClick={() => dispatch({ type:"reset" })}>Reset</button>
-    </div>
+      validate={(values)=> {
+        const errors = {} ;
+        if(!values.name){
+          errors.name = "Name is Required" ;
+        }
 
+        if(values.email == ''){
+          errors.email = 'Email is required' ;
+        }else if(!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i.test(values.email)){
+          errors.email = "Invalid email address" ;
+        }
+        return errors ;
+      }}
+    >
+      <Form>
+        <div>
+          <label htmlFor="name">Name</label>
+          <Field type='text' name='name'/>
+          <ErrorMessage name='name' component='div' className="error"/>
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <Field type='email' name='email'/>
+          <ErrorMessage name="email" component='div' className="error"/>
+        </div>
+        <div>
+          <label htmlFor="message">Message</label>
+          <Field as='textarea' name='message'/>
+          <ErrorMessage name='message' component='div' className="error" />
+        </div>
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
   )
 }
 
-export { App as default , MessageContext};
+function App(){
+
+  return(
+   <div>
+      <ContactForm/>
+   </div>
+  )
+}
+
+export default App;
