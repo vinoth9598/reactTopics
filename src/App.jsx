@@ -1,13 +1,18 @@
 
-import React from "react" ;
+import React, { useReducer } from "react" ;
+import { initialState, reducer } from "./countReducer";
 
 function App(){
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return(
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+        <h3>useReducer using counter : {state.count}</h3>
+        <button onClick={() => dispatch({ type:"Incr" })}>Increment</button>
+        <button onClick={() => dispatch({ type:"Decr" })}>Decrement</button>
+        <button onClick={() => dispatch({ type:"reset" })}>Reset</button>
     </div>
+
   )
 }
 
