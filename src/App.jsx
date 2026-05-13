@@ -1,12 +1,22 @@
 
-import React from "react" ;
+import React, { useCallback, useState } from "react" ;
 
 function App(){
+
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(()=>{
+    console.log("Button Clicked");
+  },[]);
+
   return(
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+       <h1>Count : {count}</h1>
+       <button onClick={()=>setCount(count+1)}>
+          Increment
+        </button>
+
+       <button onClick={handleClick}>click me</button>
     </div>
   )
 }
