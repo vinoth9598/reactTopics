@@ -117,6 +117,9 @@ Example:
   
 API Handling
   Fetch API
+  
   fetch("https://api.com/users")
+  
   Axios
+  
   axios.get("url")
