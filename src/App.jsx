@@ -1,31 +1,33 @@
 import React, { useMemo, useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0);
-  const [text, setText] = useState("");
+import React, { useCallback, useState, memo } from 'react'
 
-  //Expensive calculation
-  const squareValue = useMemo(() => {
-    console.log("Calculating...") ;
-    return count * count ;
-
-  },[count]); //runs only count changes
+const Child = memo(({onSave})=>{
+  console.log("Child Rendered!");
 
   return (
     <div>
-      <h3>useMemo hook Example</h3>
+      <button onClick={onSave}>Save</button>
+    </div>
+  )
+})
 
-      <p>Count : {count}</p>
-      <p>Squared Value : {squareValue}</p>
+function App() {
+  const [count, setCount] = useState(0);
 
-      <button onClick={()=> setCount(count + 1)}>Increment</button><br/>
+  //function will not recreate on every render
+  const handleSave = useCallback(()=>{
+    alert("Data Saved")
+  },[]) ;
 
-      <input
-        type='text'
-        placeholder='Type here'
-        value={text}
-        onChange={(e)=> setText(e.target.value)}
-      />
+  return (
+    <div>
+        <h1>Count : {count}</h1>
+        <button onClick={()=> setCount(count + 1)}>
+            Increment
+        </button>
+
+        <Child onSave = {handleSave}/>
     </div>
   )
 }
