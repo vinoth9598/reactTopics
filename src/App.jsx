@@ -1,22 +1,32 @@
 
-import React, { useCallback, useState } from "react" ;
+import React, { useCallback, useState, memo } from 'react'
 
-function App(){
+const Child = memo(({onSave})=>{
+  console.log("Child Rendered!");
 
+  return (
+    <div>
+      <button onClick={onSave}>Save</button>
+    </div>
+  )
+})
+
+function App() {
   const [count, setCount] = useState(0);
 
-  const handleClick = useCallback(()=>{
-    console.log("Button Clicked");
-  },[]);
+  //function will not recreate on every render
+  const handleSave = useCallback(()=>{
+    alert("Data Saved")
+  },[]) ;
 
-  return(
+  return (
     <div>
-       <h1>Count : {count}</h1>
-       <button onClick={()=>setCount(count+1)}>
-          Increment
+        <h1>Count : {count}</h1>
+        <button onClick={()=> setCount(count + 1)}>
+            Increment
         </button>
 
-       <button onClick={handleClick}>click me</button>
+        <Child onSave = {handleSave}/>
     </div>
   )
 }
