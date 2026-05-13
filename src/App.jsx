@@ -1,14 +1,26 @@
+import React, { useState } from 'react'
 
-import React from "react" ;
+function useCounter(){
+  const [count, setCount] = useState(0);
+  const increment = () => {
+    setCount(count + 1);
+  }
+  const decrement = () => {
+    setCount (count -1);
+  }
+  return {count, increment, decrement} ;
+}
 
-function App(){
-  return(
+function App() {
+  const { count, increment, decrement } = useCounter();
+
+  return (
     <div>
-        <h1>Welcome to React</h1>
-        <p>This comment use it for create react App</p>
-        <b>npm create vite@latest project_fileName</b>
+      <h1>Count : {count}</h1>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
     </div>
   )
 }
 
-export default App ;
+export default App
