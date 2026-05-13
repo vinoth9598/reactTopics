@@ -1,16 +1,122 @@
-# React + Vite
+React all Basic concepts and hooks 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Components
+  Functional Component
+    function Welcome() {
+      return <h1>Hello</h1>;
+    }
+  Class Component
+    class Welcome extends React.Component {
+      render() {
+        return <h1>Hello</h1>;
+      }
+    }
+   
+3. Props
 
-Currently, two official plugins are available:
+Used to pass data between components.
+  function User(props) {
+    return <h1>{props.name}</h1>;
+  }
+  
+4. State
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Used to manage dynamic data.
+  const [count, setCount] = useState(0);
+  
+5. Event Handling
+  <button onClick={handleClick}>Click</button>
 
-## React Compiler
+  Events:
+  onClick
+  onChange
+  onSubmit
+  onMouseOver
+  
+6. Conditional Rendering
+{isLogin ? <h1>Welcome</h1> : <h1>Login</h1>}
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+8. Lists and Keys
+users.map((user) => <li key={user.id}>{user.name}</li>)
 
-## Expanding the ESLint configuration
+9. Forms
+Controlled Component
+<input value={name} onChange={(e)=>setName(e.target.value)} />
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React Hooks
+1. useState
+
+Manages state.
+
+const [count, setCount] = useState(0);
+
+2. useEffect
+
+Handles side effects.
+
+useEffect(() => {
+  console.log("Rendered");
+}, []);
+
+Uses:
+
+API calls
+Timers
+DOM updates
+
+3. useContext
+
+Used for global state.
+
+const value = useContext(UserContext);
+
+4. useRef
+
+Access DOM elements without re-render.
+
+const inputRef = useRef();
+
+5. useMemo
+Memoizes values.
+
+const result = useMemo(() => num * 2, [num]);
+
+6. useCallback
+
+Memoizes functions.
+
+const handleClick = useCallback(() => {}, []);
+
+7. useReducer
+
+Alternative for complex state.
+
+const [state, dispatch] = useReducer(reducer, initialState);
+8. Custom Hooks
+
+Reusable hook logic.
+
+function useCounter() {
+  const [count, setCount] = useState(0);
+}
+
+React Router Topics
+  Installation
+    npm install react-router-dom
+    
+    Main Components
+      BrowserRouter
+      Routes
+      Route
+      Link
+      useNavigate
+      useParams
+
+Example:
+  <Route path="/home" element={<Home />} />
+  
+API Handling
+  Fetch API
+  fetch("https://api.com/users")
+  Axios
+  axios.get("url")
